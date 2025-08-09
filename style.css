@@ -11,6 +11,13 @@ body{
 }
 .logo{
     color: white;
+    display: flex;
+    justify-content:flex-start;
+    font-size: 40px;
+}
+.logo span{
+    margin-top: 15px;
+    margin-left: 10px;
 }
 .left{
     width: 25vw;
@@ -74,7 +81,7 @@ body{
     flex-wrap: wrap;
     margin: 25px;
     max-height: 70vh;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 .card{
     width:200px;
@@ -144,12 +151,11 @@ body{
 .playbar{
     position: fixed;
     bottom: 30px;
-    background: rgba(76, 76, 76, 0.425);
+    background:#202020;
     width: 70vw;
-    padding-bottom: 15px;
-    padding-top: 15px;
+    padding-bottom: 35px;
     border-radius: 5px;
-    height: 50px;
+    min-height: 50px;
 }
 .song-btns{
     display: flex;
@@ -161,15 +167,18 @@ body{
 }
 .songlist ul{
     padding: 0 10px;
+    margin-top: 20px;
+    overflow-y: auto;
+    margin-bottom: 20px;
+    height: 100vh;
+    width: 300px;
 }
 .songlist img{
     margin-left: 5px;
 }
 .songlist{
-    height: 544px;
+    height: 100vh;
     width: 344px;
-    overflow-y: auto;
-    margin-bottom: 20px;
 }
 .songlist ul li{
     list-style-type: none;
@@ -205,6 +214,18 @@ body{
     bottom: 0;
     border-radius: 10px;
     margin-bottom: 7px;
+    cursor: pointer;
+}
+.seekbar:active{
+    height: 1px;
+    background: green;
+    width: 100%;
+    border: 1px solid green;
+    position: absolute;
+    bottom: 0;
+    border-radius: 10px;
+    margin-bottom: 7px;
+    cursor: pointer;
 }
 .circle{
     background: white;
@@ -216,4 +237,71 @@ body{
     bottom: 8px;
     left: 0%;
     transition: left 0.6s;
+}
+.circle:hover{
+    background: green;
+    width: 13px;
+    height: 13px;
+    border-radius: 30px;
+    border: 2px solid white;
+    position: relative;
+    bottom: 8px;
+    left: 0%;
+    transition: left 0.6s;
+}
+.above-bar{
+    display: flex;
+    justify-content: space-between;
+    margin: 20px 0;
+}
+.song-info, .song-time{
+    padding: 0 10px;
+}
+.hamcont{
+    display: none;
+    justify-content: center;
+    align-items: center;
+    gap:14px
+}
+.close{
+    display: none;
+}
+@media (max-width : 1240px) {
+    .left{
+        background-color:black ;
+        position: absolute;
+        left: -120%;
+        transition: all .5s;
+        z-index: 1;
+        width: 370px;
+    }
+    .close{
+        display: flex;
+        position: absolute;
+        right: 30px;
+        top: 25px;
+    }
+    .right{
+        width:100vw;
+    }
+    .playbar{
+        width: calc(100vw - 60px);
+    }
+    .seekbar{
+        width: calc(100vw - 70px);
+    }
+    .hamcont{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap:14px
+    }
+    .card{
+        width: 90vw;
+        margin-top: 15px;
+    }
+    .card-container{
+        margin: 0;
+        justify-content: center;
+    }
 }

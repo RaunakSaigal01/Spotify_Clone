@@ -14,16 +14,31 @@ async function getSongs() {
     }
     return songs;
 }
-const playMusic = (track) => {
-    currsong.src = "/songs/" + track + ".mp3"
-    currsong.play()
+function secondsToMinuteSeconds(seconds){
+    if(isNaN(seconds) || seconds<0){
+        return "--";
+    }
+    const minutes = Math.floor(seconds/60);
+    const remain = Math.floor(seconds%60);
+    const formatMin = String(minutes).padStart(2,'0');
+    const formatSec = String(remain).padStart(2,'0');
+    return `${formatMin}:${formatSec}`;
+}
+
+const playMusic = (track , pause=false, prior=false) => {
     let play=document.getElementById("play");
-    play.src="pause.svg"
+    if(prior)currsong.src = "/songs/" + track
+    else currsong.src = "/songs/" + track +".mp3"
+    if(!pause){currsong.play()
+        play.src="pause.svg"
+    }
+    document.querySelector(".song-info").innerHTML = decodeURIComponent(track.replace(".mp3",""))
+    document.querySelector(".song-time").innerHTML = "00:00/00:00";
 
 }
 async function main() {
     let songs = await getSongs();
-    console.log(songs);
+    playMusic(songs[0],true,true)
     let songul = document.querySelector(".songlist").getElementsByTagName("ul")[0];
     for (const song of songs) {
         songul.innerHTML = songul.innerHTML + `<li>
@@ -57,6 +72,23 @@ async function main() {
             currsong.pause();
             play.src="play.svg"
         }
+    })
+
+    currsong.addEventListener("timeupdate",()=>{
+        console.log(currsong.currentTime,currsong.duration);
+        document.querySelector(".song-time").innerHTML=`${secondsToMinuteSeconds(currsong.currentTime)}/${secondsToMinuteSeconds(currsong.duration)}`;
+        document.querySelector(".circle").style.left = (currsong.currentTime/currsong.duration)*100+"%";
+    })
+    document.querySelector(".seekbar").addEventListener("click",e=>{
+        let percent = ((e.offsetX/e.target.getBoundingClientRect().width))*100
+        document.querySelector(".circle").style.left = percent +"%";
+        currsong.currentTime = (currsong.duration * percent)/100
+    })
+    document.querySelector(".hamcont").addEventListener("click",()=>{
+        document.querySelector(".left").style.left="0";
+    })
+    document.querySelector(".close").addEventListener("click",()=>{
+        document.querySelector(".left").style.left="-120%";
     })
 }
 main();

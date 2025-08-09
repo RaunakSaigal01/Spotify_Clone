@@ -12,8 +12,12 @@
 <body>
     <div class="container flex bg-black">
         <div class="left bg-black">
+            <div class="close"><img src="close.svg" alt="" class="invert"></div>
             <div class="home bg-grey rounded m-1 p-1">
-                <div class="logo"><img class="invert" src="logo.svg" alt=""></div>
+                <div class="logo">
+                    <img class="invert" src="logo.svg" alt="" width="80px">
+                    <span>Spotify</span>
+                </div>
                 <ul>
                     <li><img src="home.svg" alt="" class="invert">Home</li>
                     <li><img src="search.svg" alt="" class="invert">Search</li>
@@ -43,6 +47,8 @@
         <div class="right bg-grey rounded">
             <div class="header">
                 <div class="nav">
+                    <div class="hamcont">
+                    <img class="invert" src="hamburg.svg" alt="" id="ham">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24">
                         <path d="M15.293 3.293 6.586 12l8.707 8.707 1.414-1.414L9.414 12l7.293-7.293-1.414-1.414z"
                             stroke="#ffffff" stroke-width="2" />
@@ -51,6 +57,7 @@
                         <path d="M7.293 4.707 14.586 12l-7.293 7.293 1.414 1.414L17.414 12 8.707 3.293 7.293 4.707z"
                             stroke="#ffffff" stroke-width="2" />
                     </svg>
+                </div>
                 </div>
                 <div class="buttons">
                     <button class="signup-btn">Sign up</button>
@@ -79,14 +86,14 @@
                         <p>Hits to boost your mood and fill you with happiness!</p>
                     </div>
                 </div>
-                <div class="playbar">
+                <center><div class="playbar">
                     <div class="seekbar">
                         <div class="circle">
 
                         </div>
                     </div>
+                    <div class="above-bar">
                     <div class="song-info">
-
                     </div>
                     <div class="song-btns">
                         <img id="previous" class="invert" src="prev.svg" alt="">
@@ -94,9 +101,10 @@
                         <img id="next" class="invert" src="next.svg" alt="">
                     </div>
                     <div class="song-time">
-
+                    </div>
                     </div>
                 </div>
+                </center>
             </div>
         </div>
     </div>
