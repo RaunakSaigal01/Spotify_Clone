@@ -1,4 +1,5 @@
 let currsong = new Audio();
+let songs;
 async function getSongs() {
     let a = await fetch("http://127.0.0.1:5500/songs/")
     let response = await a.text();
@@ -37,7 +38,7 @@ const playMusic = (track , pause=false, prior=false) => {
 
 }
 async function main() {
-    let songs = await getSongs();
+    songs = await getSongs();
     playMusic(songs[0],true,true)
     let songul = document.querySelector(".songlist").getElementsByTagName("ul")[0];
     for (const song of songs) {
@@ -89,6 +90,24 @@ async function main() {
     })
     document.querySelector(".close").addEventListener("click",()=>{
         document.querySelector(".left").style.left="-120%";
+    })
+    previous.addEventListener("click",()=>{
+        let index= songs.indexOf(currsong.src.split("/").slice(-1)[0]);
+        if(index-1 >= 0 ){
+            document.querySelector(".circle").style.left = "0%";
+            playMusic(songs[index-1],false,true);
+        }
+    });
+    next.addEventListener("click",()=>{
+        let index= songs.indexOf(currsong.src.split("/").slice(-1)[0]);
+        console.log(currsong.src.split("/").slice(-1)[0]);
+        if(index+1 < songs.length){
+            document.querySelector(".circle").style.left = "0%";
+            playMusic(songs[index+1],false,true);
+        }
+    })
+    document.getElementsByTagName("input")[0].addEventListener("change",(e)=>{
+        currsong.volume = parseInt(e.target.value)/100
     })
 }
 main();
